@@ -9,6 +9,11 @@ st.write(
     "[Tutorial](https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html)"
 )
 
+FACE_CASCADE = cv2.CascadeClassifier()
+EYES_CASCADE = cv2.CascadeClassifier()
+
+FACE_CASCADE.load("haarcascade_frontalcatface.xml")
+EYES_CASCADE.load("haarcascade_eye_tree_eyeglasses.xml")
 
 st.code(
     """
