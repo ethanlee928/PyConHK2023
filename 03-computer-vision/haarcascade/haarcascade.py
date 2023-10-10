@@ -1,8 +1,11 @@
+import logging
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer
 import av
 import cv2
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 st.title("OpenCV Haarcascade Face & Eyes Detection 👀")
 st.write(
@@ -68,6 +71,7 @@ def detect(img):
 def callback(frame):
     img = frame.to_ndarray(format="bgr24")
     img = detect(img)
+    logger.info("HELLO WORLD")
     return av.VideoFrame.from_ndarray(img, format="bgr24")
 
 
