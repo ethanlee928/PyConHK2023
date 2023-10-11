@@ -5,6 +5,7 @@ from streamlit_webrtc import webrtc_streamer
 from jetson_inference import detectNet
 from jetson_utils import cudaFromNumpy, cudaToNumpy
 
+# Using pre-trained mobilenet-v2 from downloaded models
 DETECTOR = detectNet("ssd-mobilenet-v2", threshold=0.5)
 
 def detect(img):
