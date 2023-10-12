@@ -10,10 +10,13 @@ import streamlit as st
 st.set_page_config(page_title="Ethan Lee Bio", page_icon="🚀", layout="wide")
 
 
-IMAGE_DIR = Path() / "images"
-IMAGES = {
-    img_path.stem: Image.open(img_path) for img_path in list(IMAGE_DIR.glob("*.jpg"))
-}
+@st.cache_data(ttl=3600)  # 1 hour time to live
+def load_images():
+    img_dir = Path() / "images"
+    return {img_path.stem: Image.open(img_path) for img_path in img_dir.glob("*.jpg")}
+
+
+IMAGES = load_images()
 RESPONSE_FILE = Path() / "response.txt"
 
 with st.container():
