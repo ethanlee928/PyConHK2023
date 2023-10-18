@@ -16,12 +16,6 @@ def load_model():
 DETECTOR = load_model()
 
 
-def get_jetson_stats():
-    with jtop() as jetson:
-        if jetson.ok():
-            return jetson.stats
-
-
 def detect(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)
     cuda_img = cudaFromNumpy(img)
@@ -45,15 +39,17 @@ ctx = webrtc_streamer(
 )
 
 gpu_bar = st.progress(0, text=f"GPU Usage(%): :green[0]")
-while ctx.state.playing:
-    gpu_usage = 0
-    color = "green"
-    if jetson_stats := get_jetson_stats():
-        gpu_usage = int(jetson_stats.get("GPU", 0))
-        if 0 <= gpu_usage < 50:
-            color = "green"
-        elif 50 <= gpu_usage < 90:
-            color = "orange"
-        else:
-            color = "red"
-    gpu_bar.progress(gpu_usage, text=f"GPU Usage(%): :{color}[{gpu_usage}]")
+with jtop() as jetson:
+    while ctx.state.playing:
+        gpu_usage = 0
+        color = "green"
+        if jetson.ok():
+            jetson_stats = jetson.stats
+            gpu_usage = int(jetson_stats.get("GPU", 0))
+            if 0 <= gpu_usage < 50:
+                color = "green"
+            elif 50 <= gpu_usage < 90:
+                color = "orange"
+            else:
+                color = "red"
+        gpu_bar.progress(gpu_usage, text=f"GPU Usage(%): :{color}[{gpu_usage}]")

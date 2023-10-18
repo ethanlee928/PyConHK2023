@@ -48,5 +48,6 @@ RUN make install
 RUN ldconfig
 
 RUN pip install streamlit streamlit-webrtc
+## jetson-stats version should be identical to the host jetson-stats version
 RUN pip install -U jetson-stats==4.2.2
 WORKDIR /jetson-inference
