@@ -1,10 +1,7 @@
-import av
 import cv2
-from jtop import jtop
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer
 from jetson_inference import detectNet
-from jetson_utils import cudaFromNumpy, cudaToNumpy, videoSource, videoOutput
+from jetson_utils import cudaToNumpy, videoSource
 
 
 @st.cache_resource
