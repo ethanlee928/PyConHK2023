@@ -80,6 +80,12 @@ cd 03-computer-vision/jetson-inference/
 
 **prerequisite**: Inside the docker container
 
+#### Download the models
+```bash
+cd /jetson-inference/tools
+./download-models.sh    # Select the models you want to download
+```
+
 ```bash
 cd 03-computer-vision/jetson-inference
 

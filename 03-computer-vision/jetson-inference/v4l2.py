@@ -19,6 +19,10 @@ DETECTOR = load_model()
 
 
 st.title("Object Detection with SSD MobilenetV2 👀")
+st.write(
+    "The default model SSD-Mobilenet-v2 is trained on the MS COCO dataset, with [91 classes](https://github.com/dusty-nv/jetson-inference/blob/master/data/networks/ssd_coco_labels.txt)"
+)
+
 with st.empty():
     while True:
         img = SOURCE.Capture(timeout=1000)

@@ -1,10 +1,11 @@
 import av
 import cv2
-from jtop import jtop
-import streamlit as st
-from streamlit_webrtc import webrtc_streamer
 from jetson_inference import detectNet
 from jetson_utils import cudaFromNumpy, cudaToNumpy
+from jtop import jtop
+from streamlit_webrtc import webrtc_streamer
+
+import streamlit as st
 
 
 # Using pre-trained mobilenet-v2 from downloaded models
@@ -30,6 +31,11 @@ def callback(frame):
     img = detect(img)
     return av.VideoFrame.from_ndarray(img, format="bgr24")
 
+
+st.title("Object Detection with SSD MobilenetV2 👀")
+st.write(
+    "The default model SSD-Mobilenet-v2 is trained on the MS COCO dataset, with [91 classes](https://github.com/dusty-nv/jetson-inference/blob/master/data/networks/ssd_coco_labels.txt)"
+)
 
 ctx = webrtc_streamer(
     key="object-detection",
