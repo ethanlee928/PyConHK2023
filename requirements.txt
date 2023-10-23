@@ -1,6 +1,8 @@
+# FOR 01-intro-page
 streamlit
 Pillow
-torch
-plotly
-scipy
+# FOR 02-simulation
+pyfmc==0.1.5
+# FOR 03-computer-vision
+opencv-python
 streamlit-webrtc~=0.45.0

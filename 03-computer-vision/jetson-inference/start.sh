@@ -4,5 +4,5 @@ docker run -it --rm --network host -v ${PWD}:/app/ \
     -v /dev/video0:/dev/video0 \
     --device /dev/video0 \
     -w /app/ \
-    jetson-inference:3.8 \
+    streamlit-jetson-inference \
     bash

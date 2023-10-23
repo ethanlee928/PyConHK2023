@@ -1,16 +1,15 @@
 import logging
-import streamlit as st
-from streamlit_webrtc import webrtc_streamer
+
 import av
 import cv2
-import numpy as np
+from streamlit_webrtc import webrtc_streamer
+
+import streamlit as st
 
 logger = logging.getLogger(__name__)
 
 st.title("OpenCV Haarcascade Face & Eyes Detection 👀")
-st.write(
-    "[Tutorial](https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html)"
-)
+st.write("[Tutorial](https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html)")
 
 FACE_CASCADE = cv2.CascadeClassifier()
 EYES_CASCADE = cv2.CascadeClassifier()
@@ -71,8 +70,12 @@ def detect(img):
 def callback(frame):
     img = frame.to_ndarray(format="bgr24")
     img = detect(img)
-    logger.info("HELLO WORLD")
     return av.VideoFrame.from_ndarray(img, format="bgr24")
 
 
-webrtc_streamer(key="example", video_frame_callback=callback)
+webrtc_streamer(
+    key="example",
+    video_frame_callback=callback,
+    media_stream_constraints={"video": True, "audio": False},
+    async_processing=True,
+)
