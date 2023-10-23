@@ -8,14 +8,27 @@ import streamlit as st
 
 logger = logging.getLogger(__name__)
 
+
+@st.cache_resource
+def load_face_cascade():
+    face_cascade = cv2.CascadeClassifier()
+    face_cascade.load("haarcascade_frontalcatface.xml")
+    return face_cascade
+
+
+@st.cache_resource
+def load_eyes_cascade():
+    eyes_cascade = cv2.CascadeClassifier()
+    eyes_cascade.load("haarcascade_eye_tree_eyeglasses.xml")
+    return eyes_cascade
+
+
+FACE_CASCADE = load_face_cascade()
+EYES_CASCADE = load_eyes_cascade()
+
+
 st.title("OpenCV Haarcascade Face & Eyes Detection 👀")
 st.write("[Tutorial](https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html)")
-
-FACE_CASCADE = cv2.CascadeClassifier()
-EYES_CASCADE = cv2.CascadeClassifier()
-
-FACE_CASCADE.load("haarcascade_frontalcatface.xml")
-EYES_CASCADE.load("haarcascade_eye_tree_eyeglasses.xml")
 
 st.code(
     """
