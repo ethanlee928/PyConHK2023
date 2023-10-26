@@ -45,12 +45,12 @@ with st.container():
 
 with st.container():
     st.write("---")
-    st.header("Side Projects")
+    st.header("Side Projects for Fun 😆")
     st.write("##")
-    img_col, txt_col = st.columns((1, 2))
-    with img_col:
+    simulation_img_col, simulation_txt_col = st.columns((1, 2))
+    with simulation_img_col:
         st.image(IMAGES["trajectory"])
-    with txt_col:
+    with simulation_txt_col:
         st.subheader("Finance Monte-Carlo Simulation using PyTorch")
         st.write(
             """
@@ -59,6 +59,19 @@ with st.container():
                  """
         )
         st.markdown("[Github >](https://github.com/ethanlee928/pyfmc)")
+
+    bot_txt_col, bot_img_col = st.columns((2, 3))
+    with bot_txt_col:
+        st.subheader("Finance Slackbot")
+        st.write(
+            """
+                    - A simple bot utilizing Polygon API, Slack API to monitor the financial market, including stocks, forex, options, and crypto
+
+                 """
+        )
+        st.markdown("[Github >](https://github.com/ethanlee928/FinanceBot)")
+    with bot_img_col:
+        st.image(IMAGES["financebot"])
 
 
 with st.container():
@@ -90,9 +103,7 @@ with st.container():
         name = st.text_input(label="Name", placeholder="Please enter your name")
         email = st.text_input(label="Email", placeholder="Please enter your email")
         message = st.text_area(label="Message", placeholder="Leave a message here~")
-        rating = st.select_slider(
-            "Streamlit is cool?", options=["Not cool", "Ok la", "Cool", "Very cool"]
-        )
+        rating = st.select_slider("Streamlit is cool?", options=["Not cool", "Ok la", "Cool", "Very cool"])
         submitted = st.form_submit_button("Submit")
         if submitted:
             with open(RESPONSE_FILE, "a" if RESPONSE_FILE.exists() else "w") as fp:
