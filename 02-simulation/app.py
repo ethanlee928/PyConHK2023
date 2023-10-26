@@ -68,3 +68,13 @@ with st.container():
         with right_col:
             st.pyplot(return_fig)
         st.write(f"There's {100 - perc_var}% chance with the odds of losing {abs(value_at_risk * 100):.2f}%")
+
+with st.container():
+    st.write("---")
+    st.subheader("References")
+    st.write(
+        """
+        - Investopedia: [How to Use Monte Carlo Simulation With GBM](https://www.investopedia.com/articles/07/montecarlo.asp)
+        - Investopedia: [Understanding Value at Risk (VaR) and How It's Computed](https://www.investopedia.com/terms/v/var.asp)
+        """
+    )
