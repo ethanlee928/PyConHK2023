@@ -1,6 +1,3 @@
-import csv
-import time
-from datetime import datetime
 from pathlib import Path
 
 from PIL import Image
@@ -77,14 +74,14 @@ with st.container():
 with st.container():
     st.write("---")
     st.header("Beautiful Places 🛫 🇯🇵")
-    img1, img2, img3 = st.columns(3)
-    with img1:
+    col1, col2, col3 = st.columns(3)
+    with col1:
         st.image(IMAGES["tateyama"], caption="Tateyama")
         st.image(IMAGES["snow_corridor"], caption="Snow Corridor")
-    with img2:
+    with col2:
         st.image(IMAGES["kamikochi"], caption="Kamikochi")
         st.image(IMAGES["monkey"], caption="Wild Monkeys")
-    with img3:
+    with col3:
         st.image(IMAGES["shirakawa"], caption="Shirakawa")
         st.markdown(
             "<p style='text-align: center; font-style: italic;'>\"a small, traditional village showcasing a building style known as gasshō-zukuri.\" &mdash; Wikipedia</p>",
@@ -94,22 +91,3 @@ with st.container():
         "<h5 style='text-align: center; font-family: Helvetica;'>Shot on iPhone</h5>",
         unsafe_allow_html=True,
     )
-
-with st.container():
-    st.write("---")
-    st.header("Get in touch with me!")
-    st.write("##")
-    with st.form("Contact"):
-        name = st.text_input(label="Name", placeholder="Please enter your name")
-        email = st.text_input(label="Email", placeholder="Please enter your email")
-        message = st.text_area(label="Message", placeholder="Leave a message here~")
-        rating = st.select_slider("Streamlit is cool?", options=["Not cool", "Ok la", "Cool", "Very cool"])
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            with open(RESPONSE_FILE, "a" if RESPONSE_FILE.exists() else "w") as fp:
-                writer = csv.writer(fp)
-                ts = datetime.now().strftime("%Y%m%d-%H:%M:%S")
-                writer.writerow([ts, name, email, message, rating])
-            success_box = st.success("Thanks for the feedback!", icon="✅")
-            time.sleep(5)
-            success_box.empty()
