@@ -1,7 +1,8 @@
 import cv2
-import streamlit as st
 from jetson_inference import detectNet
 from jetson_utils import cudaToNumpy, videoSource
+
+import streamlit as st
 
 
 @st.cache_resource
